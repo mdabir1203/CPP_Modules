@@ -6,7 +6,7 @@
 /*   By: mabbas <mabbas@students.42wolfsburg.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/01 21:39:07 by mabbas            #+#    #+#             */
-/*   Updated: 2023/05/03 03:44:00 by mabbas           ###   ########.fr       */
+/*   Updated: 2023/05/03 09:46:17 by mabbas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,15 +21,14 @@ From the project we can infer that it makes from lowecase to uppercase
 
 
 -> What did we learn : 
-    1.  
+    1. Using headers, libraries in c++
+    2. used the reserve function which is from C++ Vector library
+    3. 
 **/
 
 #include <iostream>
 #include <string>
 #include <cctype>
-
-
-
 
 std::string to_uppercase(const std::string str)
 {
