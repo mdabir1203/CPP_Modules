@@ -6,7 +6,7 @@
 /*   By: mabbas <mabbas@students.42wolfsburg.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/01 21:39:07 by mabbas            #+#    #+#             */
-/*   Updated: 2023/05/03 09:46:17 by mabbas           ###   ########.fr       */
+/*   Updated: 2023/05/10 14:15:23 by mabbas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ From the project we can infer that it makes from lowecase to uppercase
 std::string to_uppercase(const std::string str)
 {
     std::string upper_str;
-    upper_str.reserve(str.length()); //reserving enough space for output string
+    upper_str.reserve(str.length());
     for (std::string::size_type i = 0; i < str.length(); i++)
     {
         upper_str.push_back(std::toupper(str[i]));
