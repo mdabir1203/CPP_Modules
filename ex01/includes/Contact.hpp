@@ -5,33 +5,42 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: mabbas <mabbas@students.42wolfsburg.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/05/11 01:39:50 by mabbas            #+#    #+#             */
-/*   Updated: 2023/05/11 01:54:53 by mabbas           ###   ########.fr       */
+/*   Created: 2023/05/11 00:53:16 by mabbas            #+#    #+#             */
+/*   Updated: 2023/05/11 16:46:48 by mabbas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PHONEBOOK_HPP
-# define PHONEBOOK_HPP
+#ifndef CONTACT_HPP
+# define CONTACT_HPP
 
 #include <iostream>
 #include <string>
-#include "Contact.hpp"
+#include <iomanip>
 
-
-class Phonebook
+/**
+ Public class -> 
+ Private class -> 
+ */
+class Contact
 {
     public:
-        Phonebook();
-        ~Phonebook();
-    
-        void add();
-        void search() const;
-    
-    private:
-        Contact _contacts[8];
-        int     _nbrContact;
-        int     _oldestContact;   
+		Contact();
+		~Contact();
 
+		
+		void addInfo();
+		void displayContact() const;
+		void displayAll() const;
+	private:
+		int 		idx;
+		std::string _firstName;
+		std::string _lastName;
+		std::string _nickName;
+		std::string _phoneNumber;
+		std::string _darkestSecret;
+
+		std::string _addInfo(std::string text) const;
+		std::string _formatInfo(std::string info) const;
 };
 
 #endif

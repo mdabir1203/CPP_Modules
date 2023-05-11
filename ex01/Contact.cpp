@@ -6,51 +6,76 @@
 /*   By: mabbas <mabbas@students.42wolfsburg.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/11 01:55:49 by mabbas            #+#    #+#             */
-/*   Updated: 2023/05/11 02:17:33 by mabbas           ###   ########.fr       */
+/*   Updated: 2023/05/11 16:58:53 by mabbas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/Phonebook.hpp"
+#include "/includes/PhoneBook.hpp"
 
-/*********************************/
-
-PhoneBook::PhoneBook(void)
+/**
+ * @brief Construct a new Phone Book:: Phone Book object
+ *   
+ */
+PhoneBook::PhoneBook()
 {
-    this->_ContactIndex = 0;
-    this->_oldestContact = 0;
+    contactIndex = 0;
+    oldestContact = 0;
 }
 
-Phonebook::~PhoneBook(void)
+Phonebook::~PhoneBook()
 {
     return ;
 }
 
-void PhoneBook::add(void)
-{
-    Contact _newContact;
-    
-    new_contact.add();
-    if (this->_contactIndex >= 8)
-        this->_oldestContact = 0;
-    this->_contacts[this->_contactIndex] = _newContact;
-    this->_newContact++;
+/** 
+    Once one adds more than 8 it replaces and contact index
+    increments to prepare for next contact addition.
+**/
+
+void PhoneBook::add()
+{   
+    newcontact.add();
+    if (contactIndex >= 8)
+        oldestContact = 0;
+    contacts[contactIndex].add();
+    contactIndex++;
+
 }
 
-void PhoneBook::search(void) const
-{
-    std::string _requestedContact;
-    
-    int idx = 0;
-    while (idx++  < 8)
-    {
-        std::cout << std::setWidth(10) << "|";
-        this->_contacts[idx].displayContact();
-    }
 
-    std::cout << "Enter desired index value of contact";
-    std::getline(std::cin, desiredContact);
-    if (_requestedContact[0] >= '0' && _requestedContact[0] <= '7' && _requiredContact.size() == 1)
-        this->_contacts[_requestedContact[0] - '0'].displayAll();
-    else
-        std::cout << "[Bruh !! Invalid Index.. Try again]" << std::endl;
+/** 
+Supports input validation, retrieves infor if it exists and returns
+provides info for incorrect input or out of range indices.
+**/
+void PhoneBook::search() const
+{
+    int idx = 0;
+	while (idx++ < contactIndex)
+    {
+        std::cout << std::setw(10) << "|";
+		contacts[idx].displayContact();
+		idx++;
+    }
+	
+    std::cout << "Enter desired index value of the contact";
+    std::string requestedContact;
+	std::getline(std::cin, requestedContact);
+	
+	if (requestedContact.size() == 1 && requestedContact[0] >= '0' && requestedContact[0] <= '7')
+    {
+		int index = requestedContact[0] - '0';
+		if (index < contactIndex)
+		{
+			contacts[index].displayAll();
+		}
+		else
+		{
+			std::cout << "Wrong Index.Try again mate. " << std::endl;
+		}
+	}
+	else
+	{
+		std::cout << "Wrong Input.Try again mate" << std::endl;
+	}
+
 }
