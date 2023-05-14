@@ -5,77 +5,100 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: mabbas <mabbas@students.42wolfsburg.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/05/11 01:55:49 by mabbas            #+#    #+#             */
-/*   Updated: 2023/05/11 16:58:53 by mabbas           ###   ########.fr       */
+/*   Created: 2023/05/12 01:47:06 by mabbas            #+#    #+#             */
+/*   Updated: 2023/05/15 01:07:35 by mabbas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "/includes/PhoneBook.hpp"
 
-/**
- * @brief Construct a new Phone Book:: Phone Book object
- *   
- */
-PhoneBook::PhoneBook()
+
+#include "includes/Contact.hpp"
+
+
+
+Contact::Contact(){idx = 0;}
+Contact::~Contact(){}
+
+void Contact::addInfo()
 {
-    contactIndex = 0;
-    oldestContact = 0;
+    std::cout << "First Name: ";
+    _firstName = this->_addInfo("");
+
+    std::cout << "Last Name: ";
+    _lastName  = this->_addInfo("Last Name");
+
+    std::cout << "Nick Name: ";
+    _nickName  = this->_addInfo("Nick Name");
+
+    std::cout << "Phone Number: ";
+    _phoneNumber = this->_addInfo("Phone Number");
+
+    std::cout << "Darkest Secret: ";
+    _darkestSecret = this->_addInfo("Darkest Secret");
+
+    std::cout << "Contact added to the phonebook. \n";
 }
 
-Phonebook::~PhoneBook()
+
+
+void Contact::displayContact() const
 {
-    return ;
+    std::cout << "First Name: " << _firstName << std::endl;
+    std::cout << "Last Name: " << _lastName << std::endl;
+    std::cout << "Nick Name: " << _nickName << std::endl;
+    std::cout << "Phone Number: " << _phoneNumber << std::endl;
+    std::cout << "Darkest Secret: " << _darkestSecret << std::endl;
+    
+}
+
+
+
+/** Creates similarity like below 
+Index      First name     Last name    Nickname
+----------------------------------------------------
+     1        Abir           Abbas        ab1r 
+     2        Mohammad       Melkoly      Mo  
+     3        Facinet        Fakyout      Faci   
+
+const -> Used as "read-only" ->Cannot modify once 
+initialized.
+- Prevents -> Unintentional modifications 
+- Improves program correctness and robustness
+- Improves Readability and maintainability
+- Better optimization and performance : faster execution times
+
+ **/
+
+void Contact::displayAll() const
+{
+    std::cout << std::right << std::setw(10) << idx
+              << std::setw(10) << _formatInfo(_firstName)
+              << std::setw(10) << _formatInfo(_lastName)
+              << std::setw(10) << _formatInfo(_nickName)
+              << std::endl;
+}
+
+/** Chose to keep this function due to design patterns 
+    Making a distinction between Public and Private Class (_)
+**/
+std::string Contact::_addInfo(std::string text) const
+{
+    std::string input;
+    std::cout << text << ": ";
+    std::getline(std::cin >> std::ws, input);
+    return input;
 }
 
 /** 
-    Once one adds more than 8 it replaces and contact index
-    increments to prepare for next contact addition.
+Newspapers often have a limited amount of space for headlines, 
+so they need to summarize the main point of an article in a shorter title.
+Similarly, if a string is too long, we can summarize it by showing the first few characters
+with an added period, [Hey, I really enjoyed reading your article and made points...]
+which represents the rest of the string. 
+
 **/
 
-void PhoneBook::add()
-{   
-    newcontact.add();
-    if (contactIndex >= 8)
-        oldestContact = 0;
-    contacts[contactIndex].add();
-    contactIndex++;
-
-}
-
-
-/** 
-Supports input validation, retrieves infor if it exists and returns
-provides info for incorrect input or out of range indices.
-**/
-void PhoneBook::search() const
+std::string Contact::_formatInfo(std::string info) const
 {
-    int idx = 0;
-	while (idx++ < contactIndex)
-    {
-        std::cout << std::setw(10) << "|";
-		contacts[idx].displayContact();
-		idx++;
-    }
-	
-    std::cout << "Enter desired index value of the contact";
-    std::string requestedContact;
-	std::getline(std::cin, requestedContact);
-	
-	if (requestedContact.size() == 1 && requestedContact[0] >= '0' && requestedContact[0] <= '7')
-    {
-		int index = requestedContact[0] - '0';
-		if (index < contactIndex)
-		{
-			contacts[index].displayAll();
-		}
-		else
-		{
-			std::cout << "Wrong Index.Try again mate. " << std::endl;
-		}
-	}
-	else
-	{
-		std::cout << "Wrong Input.Try again mate" << std::endl;
-	}
-
+    return (info.length() > 10) ? info.substr(0,9) + "." : info;
 }

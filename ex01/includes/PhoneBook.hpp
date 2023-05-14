@@ -6,7 +6,7 @@
 /*   By: mabbas <mabbas@students.42wolfsburg.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/11 16:46:21 by mabbas            #+#    #+#             */
-/*   Updated: 2023/05/11 16:56:33 by mabbas           ###   ########.fr       */
+/*   Updated: 2023/05/15 00:50:14 by mabbas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ class Phonebook
         Phonebook();
         ~Phonebook();
     
-        void add();
+        void addInfo();
         void search() const;
     
     private:
