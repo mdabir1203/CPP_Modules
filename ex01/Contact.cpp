@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   contact.cpp                                        :+:      :+:    :+:   */
+/*   Contact.cpp                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mabbas <mabbas@students.42wolfsburg.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/12 01:47:06 by mabbas            #+#    #+#             */
-/*   Updated: 2023/05/15 01:07:35 by mabbas           ###   ########.fr       */
+/*   Updated: 2023/05/17 21:23:19 by mabbas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,8 +44,8 @@ void Contact::addInfo()
 void Contact::displayContact() const
 {
     std::cout << "First Name: " << _firstName << std::endl;
-    std::cout << "Last Name: " << _lastName << std::endl;
-    std::cout << "Nick Name: " << _nickName << std::endl;
+    std::cout << "Last Name: " << _lastName  << std::endl;
+    std::cout << "Nick Name: " <<  _nickName <<  std::endl;
     std::cout << "Phone Number: " << _phoneNumber << std::endl;
     std::cout << "Darkest Secret: " << _darkestSecret << std::endl;
     
@@ -84,7 +84,6 @@ void Contact::displayAll() const
 std::string Contact::_addInfo(std::string text) const
 {
     std::string input;
-    std::cout << text << ": ";
     std::getline(std::cin >> std::ws, input);
     return input;
 }
