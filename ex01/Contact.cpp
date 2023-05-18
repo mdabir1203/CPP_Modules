@@ -6,14 +6,15 @@
 /*   By: mabbas <mabbas@students.42wolfsburg.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/12 01:47:06 by mabbas            #+#    #+#             */
-/*   Updated: 2023/05/17 21:23:19 by mabbas           ###   ########.fr       */
+/*   Updated: 2023/05/18 04:25:59 by mabbas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 
 
 #include "includes/Contact.hpp"
-
+#include <iostream>
+#include <iomanip>
 
 
 Contact::Contact(){idx = 0;}
@@ -41,14 +42,19 @@ void Contact::addInfo()
 
 
 
-void Contact::displayContact() const
+bool Contact::displayContact() const
 {
+    if (_firstName.empty() && _lastName.empty() && _nickName.empty()
+        && _phoneNumber.empty() && _darkestSecret.empty())
+    {
+        return false;
+    }
     std::cout << "First Name: " << _firstName << std::endl;
     std::cout << "Last Name: " << _lastName  << std::endl;
     std::cout << "Nick Name: " <<  _nickName <<  std::endl;
     std::cout << "Phone Number: " << _phoneNumber << std::endl;
     std::cout << "Darkest Secret: " << _darkestSecret << std::endl;
-    
+    return true;
 }
 
 
@@ -81,9 +87,8 @@ void Contact::displayAll() const
 /** Chose to keep this function due to design patterns 
     Making a distinction between Public and Private Class (_)
 **/
-std::string Contact::_addInfo(std::string text) const
+std::string Contact::_addInfo(std::string input) const
 {
-    std::string input;
     std::getline(std::cin >> std::ws, input);
     return input;
 }

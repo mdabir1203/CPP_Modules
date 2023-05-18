@@ -6,7 +6,7 @@
 /*   By: mabbas <mabbas@students.42wolfsburg.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/11 16:46:21 by mabbas            #+#    #+#             */
-/*   Updated: 2023/05/15 00:50:14 by mabbas           ###   ########.fr       */
+/*   Updated: 2023/05/18 04:08:54 by mabbas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,8 @@ class Phonebook
     
         void addInfo();
         void search() const;
+        void getUserInput(bool& displayAllContacts, int& contactIndexToDisplay) const;
+        void displayAllContactsInPhonebook() const;
     
     private:
         Contact contacts[8];

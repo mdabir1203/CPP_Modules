@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   contact.hpp                                        :+:      :+:    :+:   */
+/*   Contact.hpp                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mabbas <mabbas@students.42wolfsburg.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/11 00:53:16 by mabbas            #+#    #+#             */
-/*   Updated: 2023/05/11 16:46:48 by mabbas           ###   ########.fr       */
+/*   Updated: 2023/05/18 04:26:21 by mabbas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ class Contact
 
 		
 		void addInfo();
-		void displayContact() const;
+		bool displayContact() const;
 		void displayAll() const;
 	private:
 		int 		idx;
