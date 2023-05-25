@@ -6,7 +6,7 @@
 /*   By: mabbas <mabbas@students.42wolfsburg.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/11 16:46:21 by mabbas            #+#    #+#             */
-/*   Updated: 2023/05/18 04:08:54 by mabbas           ###   ########.fr       */
+/*   Updated: 2023/05/25 03:18:05 by mabbas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,16 +25,15 @@ class Phonebook
         Phonebook();
         ~Phonebook();
     
-        void addInfo();
-        void search() const;
-        void getUserInput(bool& displayAllContacts, int& contactIndexToDisplay) const;
-        void displayAllContactsInPhonebook() const;
+        void addContact();
+        void searchContact(int idx) const;
+        void displayContacts() const;
     
     private:
         Contact contacts[8];
-        int     contactIndex;
-        int     oldestContact;   
-
+        int     numContacts;
+        std::string strTruncate(const std::string& str, int len) const;
+        void displayDelimiter(int width, char DelimiterChar);
 };
 
 #endif

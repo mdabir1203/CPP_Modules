@@ -6,26 +6,26 @@
 /*   By: mabbas <mabbas@students.42wolfsburg.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/11 01:55:49 by mabbas            #+#    #+#             */
-/*   Updated: 2023/05/18 20:48:29 by mabbas           ###   ########.fr       */
+/*   Updated: 2023/05/25 03:18:41 by mabbas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+
+
+/** Fix the issue with parsing in phonebook index 
+ *  -> check for edge cases which is not required 
+ *  -> 
+ * 
+ * 
+ * 
+ *  **/
 #include "includes/PhoneBook.hpp"
 
 /**
  * @brief Construct a new Phone Book:: Phone Book object
  *   
  */
-Phonebook::Phonebook()
-{
-    contactIndex = 0;
-    oldestContact = 0;
-}
-
-Phonebook::~Phonebook()
-{
-    return ;
-}
+Phonebook::Phonebook() : currentIndex(0) {}
 
 /** 
     Keeps track of index -> OldContactAddress
@@ -35,88 +35,86 @@ Phonebook::~Phonebook()
 	
 **/
 
-void Phonebook::addInfo()
+void Phonebook::addContact(const Contact& newContact)
 {
-    if (contactIndex >= 8)
+    if (numContacts++ < 8)
 	{
-        oldestContact = (oldestContact + 1) % 8;
-    }
-    Contact newContact;
-	newContact.addInfo();
-    contacts[contactIndex % 8] = newContact;
-    contactIndex++;
-}
-
-/** 
-& is here passed by reference not by value
-
--> Func receives actual memory add of var pass in from calling fnc,instead of copy of its value.
--> Benefit: Modify value of var directly without separating copy of var.
-        -> Reduce memory usage + improves performance with large obj/arrays
-**/
-
-void Phonebook::getUserInput(bool& displayAllContacts, int& contactIndexToDisplay) const
-{
-	std::cout << "Enter desired index value of the contact or type 'show' to display all contacts:";
-
-	std::string userInput;
-	std::getline(std::cin, userInput);
-	if (userInput == "show")
-		displayAllContacts = true;
-	else
-		contactIndexToDisplay = std::atoi(userInput.c_str());
-}
-
-
-void Phonebook::displayAllContactsInPhonebook() const
-{
-	int i = 0;
-	while (i < contactIndex)
-	{
-		std::cout << "[" << i + 1 << "]";
-		
-		if (contacts[i].displayContact())
-		{
-			std::cout << "Contact is empty" << std::endl;
-		}
-		else
-		{
-			contacts[i].displayContact();
-		}
-		std::cout << std::endl;
-		i++;
-	}
-}
-
-
-/** 
-Supports input validation, retrieves info if it exists and returns
-provides info for incorrect input or out of range indices.
-**/
-
-void Phonebook::search() const
-{
-	if (contactIndex == 0)
-	{
-		std::cout << "No Contacts found\n";
-		return ;
-	}
-
-	bool displayAllContacts = false;
-	int contactIndexToDisplay = -1;
-
-	getUserInput(displayAllContacts, contactIndexToDisplay);
-    
-	if (displayAllContacts)
-	{
-		displayAllContactsInPhonebook();
+		contacts[numContacts] = newContact;
 	}
 	else
 	{
-		if (contactIndexToDisplay >= 0 && contactIndexToDisplay < contactIndex)
-			contacts[contactIndexToDisplay].displayContact();
-		else
-			std::cout << "Invalid index. Please enter a valid index value," << std::endl;
+		contacts[8 - 1] = newContact;
 	}
+	
+}
+
+void Phonebook::searchContact(int idx) const
+{
+	if (idx >= 0 && idx < numContacts)
+		contacts[idx].displayContact();
+	else
+	{
+		if (idx < 0)
+			std::cout << "Invalid Index. Please enter positive index" << std::endl;
+		else if (idx >= numContacts);
+			std::cout << "Invalid Index. Out of range" << std::endl;
+	}
+}
+
+void displayDelimiter(int width, char DelimiterChar) {
+    std::string Delimiter(width, DelimiterChar);
+    std::cout << Delimiter << std::endl;
+}
+
+
+std::string strTruncate(const std::string& str, int width)
+{
+	
+	if (str.length() <= width)
+		return (str);
+	else
+		return (str.substr(0, width - 1) + ".");
 
 }
+
+void displayHeader(int colW)
+{
+	std::cout << std::setw(colW) << "Index" << " | ";
+	std::cout << std::setw(colW) << "First Name" << " | ";
+	std::cout << std::setw(colW) << "Last Name" << " | ";
+	std::cout << std::setw(colW) << "Nick Name" << " | " << std::endl;	
+}
+
+void Phonebook::displayContacts() const 
+{
+	int colW 	   = 10;
+	int totalWidth = 43; // colW *4 + 3 * 1
+	std::string displayDelimiter(totalWidth, '-');
+	
+	std::cout << std::right << std::setw(totalWidth);
+	displayDelimiter(10, '-');
+
+	std::string title = "Phonebook";
+	std::cout << std::right << std::setw(totalWidth) << title << std::endl;
+	displayDelimiter();
+	displayHeader();
+	displayDelimiter();
+	
+	for (int i = 0; i < contacts.size(); i++)
+	{
+		std::cout << std::right << std::setw(colW) << i << " | ";
+		std::cout << std::right << std::setw(colW) << i << strTruncate(contacts[i].getFirstName(), colW)
+			<< " | ";
+		std::cout << std::right << std::setw(colW) << i << strTruncate(contacts[i].getLastName(), colW)
+			<< " | ";
+		std::cout << std::right << std::setw(colW) << i << strTruncate(contacts[i].getNickName(), colW) 
+			<< std::endl;
+	}
+	
+}
+
+
+
+
+
+

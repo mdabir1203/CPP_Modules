@@ -6,7 +6,7 @@
 /*   By: mabbas <mabbas@students.42wolfsburg.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/12 01:47:06 by mabbas            #+#    #+#             */
-/*   Updated: 2023/05/18 04:25:59 by mabbas           ###   ########.fr       */
+/*   Updated: 2023/05/24 17:32:31 by mabbas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,11 +44,8 @@ void Contact::addInfo()
 
 bool Contact::displayContact() const
 {
-    if (_firstName.empty() && _lastName.empty() && _nickName.empty()
-        && _phoneNumber.empty() && _darkestSecret.empty())
-    {
-        return false;
-    }
+
+    
     std::cout << "First Name: " << _firstName << std::endl;
     std::cout << "Last Name: " << _lastName  << std::endl;
     std::cout << "Nick Name: " <<  _nickName <<  std::endl;
