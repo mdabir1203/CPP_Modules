@@ -12,45 +12,57 @@
 
 #include "includes/Contact.hpp"
 #include "includes/PhoneBook.hpp"
-#include <chrono>
-#include <thread>
-#include <iostream>
-
+#include <stdlib.h>
 
 /* 
-Line 24 -> Used to start with clean and empty phonebook
--> Creates a new instance of the phonebook class and assigns
-to the variable
--> 41 -> Clear input buffer
+  
 */
+
 int main()
 {
-    Phonebook phonebook = Phonebook();
-    std::string    cmd;
+    Phonebook PhoneBook;
+    bool operation = true; 
+    std::string cmd;
 
     std::cout << "Welcome to my Crappy awesome Phonebook" << std::endl;
-    
-    while (true)
+
+    while (operation && std::getline(std::cin, cmd))
     {
-        std::cout << "\033[?25l";
-        std::this_thread::sleep_for(std::chrono::milliseconds(100));
-        std::cout << "\r\033[K";
-        std::this_thread::sleep_for(std::chrono::milliseconds(100));
-        std::cout << "Enter Any of the three commands ADD, SEARCH or EXIT";
-        std::cout << '\n';
-        std::getline(std::cin >> std::ws, cmd);
-        std::cout << '\n';
-		if (cmd == "ADD")
-            phonebook.addInfo();
-        else if (cmd == "SEARCH")
-            phonebook.search();
-        else if (cmd == "EXIT")
-            exit(0);
-		else
+        if (std::cin.eof() == true)
         {
-            std::cout << "Invalid command entered !!" << std::endl;
-            std::cin.ignore(1000, '\n');
-        }    
+            std::cout << "You Pressed ^D. Exiting phonebook now." << std::endl;
+            exit(0);
+        }
+        
+        std::cout << "Enter any of the three commands: ADD, SEARCH, or EXIT" << std::endl;
+        if (cmd.compare("ADD") == 0)
+            PhoneBook.addNewContact();
+        else if (cmd.compare("SEARCH") == 0)
+            PhoneBook.searchContact();
+        else if (cmd.compare("EXIT") == 0)
+        {
+            std::cout << "\033[34mThank you for tolerating my crappy phonebook. Good Bye.\033[0m" << std::endl;
+            operation = false;
+            continue ;
+        }
+        cmd.clear();
     }
-    return (0);
+
+    return 0;
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

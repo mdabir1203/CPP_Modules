@@ -18,6 +18,8 @@
 #include <string>
 #include "Contact.hpp"
 
+#define MAX_CONTACTS 8
+
 
 class Phonebook
 {
@@ -25,15 +27,14 @@ class Phonebook
         Phonebook();
         ~Phonebook();
     
-        void addContact();
-        void searchContact(int idx) const;
+        void addNewContact();
+        void searchContact() const;
         void displayContacts() const;
+        void displayContactsList() const;
     
     private:
-        Contact contacts[8];
-        int     numContacts;
-        std::string strTruncate(const std::string& str, int len) const;
-        void displayDelimiter(int width, char DelimiterChar);
+        Contact contacts[MAX_CONTACTS];
+        int     curIdx;
 };
 
 #endif

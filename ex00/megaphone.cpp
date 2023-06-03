@@ -30,6 +30,12 @@ From the project we can infer that it makes from lowecase to uppercase
 #include <string>
 #include <cctype>
 
+/**
+ * push_back() function is used to add characrters to the upper_str one by one
+ * as they are converted to uppercase
+ * reserve to allocate memory before adding chars to it -> avoids frequent reallocation
+ * improves performance for large strings 
+*/
 std::string to_uppercase(const std::string str)
 {
     std::string upper_str;

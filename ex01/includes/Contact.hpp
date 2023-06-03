@@ -26,21 +26,21 @@ class Contact
     public:
 		Contact();
 		~Contact();
+		Contact(const std::string &firstName, const std::string &lastName, const std::string &nickName, const std::string &phoneNumber, const std::string &darkestSecret);
 
+		std::string getFirstName() const;
+		std::string getLastName() const;
+		std::string getNickName() const;
+		std::string getPhoneNumber() const;
+		std::string getDarkestSecret() const;
+		void displayContactInfo() const;
 		
-		void addContact();
-		bool displayContact() const;
-		void displayAll() const;
 	private:
-		int 		idx;
 		std::string _firstName;
 		std::string _lastName;
 		std::string _nickName;
 		std::string _phoneNumber;
 		std::string _darkestSecret;
-
-		std::string _addInfo(std::string text) const;
-		std::string _formatInfo(std::string info) const;
 };
 
 #endif
