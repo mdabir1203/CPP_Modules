@@ -17,6 +17,7 @@
 #include <iostream>
 #include <string>
 #include "Contact.hpp"
+#include <sstream>
 
 #define MAX_CONTACTS 8
 

@@ -58,7 +58,11 @@ void Phonebook::addNewContact()
 
 }
 
-
+/**
+ * isstream parses the input str to an int val stored in idx var.
+ * iss is the obj -> extracts the int val from the input str
+ * iss.eof() -> checks if the end of the input str is reached
+*/
 void Phonebook::searchContact() const
 {
 	if (curIdx == 0)
@@ -67,13 +71,21 @@ void Phonebook::searchContact() const
 		return ;
 	}
 
-	displayContactsList();
-	int idx;
+	std::string input;
 	std::cout << "Enter index value of contact: ";
-	std::cin >> idx;
-	if (idx < 0 || idx >= curIdx)
+	std::cin >> input;
+
+	std::istringstream iss(input);
+	int idx;
+	if (!(iss >> idx) || !iss.eof())
 	{
 		std::cout << "Invalid Index. Please enter positive index" << std::endl;
+		return ;
+	}
+
+	if (idx < 0 || idx >= curIdx)
+	{
+		std::cout << "Invalid Index.Please enter a valid index" << std::endl;
 		return ;
 	}
 	contacts[idx].displayContactInfo();
@@ -86,8 +98,7 @@ void Phonebook::displayContactsList() const
 	std::cout << "--------------------------------------------------------------------------\n";
 	std::cout << "Index | First Name | Last Name | Nick Name | Phone Number | Darkest Secret\n";
 	std::cout << "--------------------------------------------------------------------------\n";
-	int i = 0;
-	while (++i < MAX_CONTACTS)
+	for(int i = 0;i < MAX_CONTACTS;i++)
 	{
 		std::string firstName = contacts[i].getFirstName();
 		std::string lastName = contacts[i].getLastName();
