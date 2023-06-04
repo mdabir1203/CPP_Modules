@@ -13,7 +13,8 @@
 #include "includes/Contact.hpp"
 #include "includes/PhoneBook.hpp"
 #include <stdlib.h>
-
+#include <cstdlib>
+#include <limits>
 /* 
   
 */
@@ -26,6 +27,9 @@ int main()
 
     std::cout << "Welcome to my Crappy awesome Phonebook" << std::endl;
 
+    std::cout << "Enter any of the three commands: ADD, SEARCH, or EXIT" << std::endl;
+    std::cout << "For Full Contact List: Enter the command: SHOW" << std::endl;
+
     while (operation && std::getline(std::cin, cmd))
     {
         if (std::cin.eof() == true)
@@ -33,9 +37,6 @@ int main()
             std::cout << "You Pressed ^D. Exiting phonebook now." << std::endl;
             exit(0);
         }
-        
-        std::cout << "Enter any of the three commands: ADD, SEARCH, or EXIT" << std::endl;
-        std::cout << "For Full Contact List: Enter the command: SHOW" << std::endl;
 
         if (cmd.compare("ADD") == 0)
             PhoneBook.addNewContact();
@@ -45,13 +46,14 @@ int main()
 		    PhoneBook.displayContactsList();
         else if (cmd.compare("EXIT") == 0)
         {
-            std::cout << "\033[34mThank you f or tolerating my crappy phonebook. Good Bye.\033[0m" << std::endl;
+            system("clear");
+            std::cout << "\033[34mThank you for tolerating my crappy phonebook. Good Bye.\033[0m" << std::endl;
             operation = false;
-            continue ;
+            exit(0);
         }
-        cmd.clear();
+        else
+            system("clear");   
     }
-
     return 0;
 }
 
