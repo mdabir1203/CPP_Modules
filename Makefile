@@ -10,11 +10,12 @@
 #                                                                              #
 # **************************************************************************** #
 
+NAME = Zombie
 SRCS := newZombie.cpp randomChump.cpp Zombie.cpp main.cpp
 OBJS := $(SRCS:.cpp=.o)
 CXX  = g++
 CXXFLAGS := -std=c++98 -Wall -Werror -Wextra -pedantic
-NAME = Zombie
+
 
 all: $(NAME)
 

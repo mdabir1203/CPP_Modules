@@ -15,7 +15,9 @@
 
 /**
  * First need to implement constructor and destructor 
- * Next printing message for zombie class 
+ * Next printing message for zombie class
+ * name here is attribute of zombie class
+ * this pointer is used to avoid confusion
  */
 
 Zombie::Zombie(std::string name)
@@ -30,5 +32,5 @@ Zombie::~Zombie()
 
 void Zombie::announce(void)
 {
-    std::cout << ": BraiiiiiiinnnzzzZ..." << std::endl;
+    std::cout << this->name <<  ": BraiiiiiiinnnzzzZ..." << std::endl;
 }

@@ -11,9 +11,15 @@
 /* ************************************************************************** */
 
 #include "Zombie.hpp"
+
+/** allocate memory
+ * call constructor with name as parameter
+ * return pointer to zombie
+ */
 Zombie* newZombie(std::string name)
 {
-    return (newZombie(name));
+    Zombie*zombie = new Zombie(name);
+    return (zombie);
 }
 
 
