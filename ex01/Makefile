@@ -3,25 +3,25 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: mabbas <mabbas@students.42wolfsburg.de>    +#+  +:+       +#+         #
+#    By: mabbas <mabbas@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2023/05/11 16:59:58 by mabbas            #+#    #+#              #
-#    Updated: 2023/05/15 01:05:15 by mabbas           ###   ########.fr        #
+#    Created: 2023/06/09 04:05:09 by mabbas            #+#    #+#              #
+#    Updated: 2023/06/09 04:10:33 by mabbas           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-SRCS := PhoneBook.cpp Contact.cpp main.cpp
+NAME = Zombie
+SRCS := newZombie.cpp randomChump.cpp Zombie.cpp main.cpp
 OBJS := $(SRCS:.cpp=.o)
-CXX = g++
-CXXFLAGS := -std=c++98 -Wall -Wextra -pedantic -Wfatal-errors
-INCDIR = ./includes/
-NAME = phonebook
+CXX  = g++
+CXXFLAGS := -std=c++98 -Wall -Werror -Wextra -pedantic
+
 
 all: $(NAME)
 
 $(NAME): $(OBJS)
-	$(CXX) $(CXXFLAGS) -I $(INCDIR)  -o $(NAME) $(OBJS)
-	@echo "Compiled successfully"
+	$(CXX) $(CXXFLAGS) -o $(NAME) $(OBJS)
+	@echo "cpp compiled"
 
 clean:
 	$(RM) $(OBJS)
