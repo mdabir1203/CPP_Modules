@@ -15,4 +15,4 @@ class HumanB
 };
 
 
-#endif //CPP01_HUMANB_H
+#endif

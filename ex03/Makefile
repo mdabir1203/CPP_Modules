@@ -5,30 +5,31 @@
 #                                                     +:+ +:+         +:+      #
 #    By: mabbas <mabbas@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2023/06/22 23:42:00 by mabbas            #+#    #+#              #
-#    Updated: 2023/06/22 23:59:17 by mabbas           ###   ########.fr        #
+#    Created: 2023/06/22 23:41:47 by mabbas            #+#    #+#              #
+#    Updated: 2023/06/23 01:23:49 by mabbas           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 
-NAME = zombieHorde
-SRCS := Zombie.cpp zombieHorde.cpp main.cpp
-OBJS := $(SRCS:.cpp=.o)
-CXX  = g++
-CXXFLAGS := -std=c++98 -Wall -Werror -Wextra -pedantic -g #-fsanitize=address
-RM   = rm -f
+SRC = main.cpp Weapon.cpp HumanA.cpp HumanB.cpp
+OBJ = $(SRC:.cpp=.o)
+CC  = g++
+RM  = rm -f
+CXXFLAGS = -Wall -Wextra -Werror -std=c++98 -pedantic -Wfatal-errors
+
+NAME = strings
 
 all: $(NAME)
 
-$(NAME): $(OBJS)
-	$(CXX) $(CXXFLAGS) -o $(NAME) $(OBJS)
-	@echo "zombies compiled"
+$(NAME): $(OBJ)
+	$(CC) $(CXXFLAGS) $(OBJ) -o $(NAME)
 
 clean:
-	$(RM) $(OBJS)
+	$(RM) $(OBJ)
 
 fclean: clean
 	$(RM) $(NAME)
-re: clean all
+
+re: fclean all
 
 .PHONY: all clean fclean re

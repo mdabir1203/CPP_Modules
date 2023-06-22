@@ -3,53 +3,31 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: mabbas <mabbas@students.42wolfsburg.de>    +#+  +:+       +#+         #
+#    By: mabbas <mabbas@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2023/05/01 21:35:50 by mabbas            #+#    #+#              #
-#    Updated: 2023/05/03 02:47:21 by mabbas           ###   ########.fr        #
+#    Created: 2023/06/09 04:05:09 by mabbas            #+#    #+#              #
+#    Updated: 2023/06/09 04:10:33 by mabbas           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-SRC = megaphone.cpp
-OBJ = $(SRC:.cpp=.o)
-CC =  g++
-CPPFLAGS = -Wall -Werror -Wextra -Wfatal-errors -std=c++98 -pedantic
-RM = rm -rf
+NAME = Zombie
+SRCS := newZombie.cpp randomChump.cpp Zombie.cpp main.cpp
+OBJS := $(SRCS:.cpp=.o)
+CXX  = g++
+CXXFLAGS := -std=c++98 -Wall -Werror -Wextra -pedantic
 
-
-
-
-# tput colors
-red := $(shell tput setaf 1)
-green := $(shell tput setaf 2)
-yellow := $(shell tput setaf 3)
-blue := $(shell tput setaf 4)
-cyan := $(shell tput setaf 6)
-cyan80 := $(shell tput setaf 86)
-grey500 := $(shell tput setaf 244)
-grey300 := $(shell tput setaf 240)
-bold := $(shell tput bold)
-underline := $(shell tput smul)
-reset := $(shell tput sgr0)
-
-
-
-NAME = megaphone
 
 all: $(NAME)
 
-$(NAME): $(OBJ)
-	$(CC) $(CPPFLAGS) $(OBJ) -o $(NAME)
+$(NAME): $(OBJS)
+	$(CXX) $(CXXFLAGS) -o $(NAME) $(OBJS)
+	@echo "cpp compiled"
 
 clean:
-	$(RM) $(OBJ)
+	$(RM) $(OBJS)
 
 fclean: clean
 	$(RM) $(NAME)
+re: clean all
 
-re: fclean $(NAME)
-
-help:
-	@echo "$(underline) $(grey300) Most important words: $(reset)\n\n" 
-
-.PHONY: all clean fclean re help
+.PHONY: all clean fclean re

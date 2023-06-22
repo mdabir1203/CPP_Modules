@@ -1,27 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Zombie.cpp                                         :+:      :+:    :+:   */
+/*   zombieHorde.hpp                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mabbas <mabbas@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/06/22 23:30:24 by mabbas            #+#    #+#             */
-/*   Updated: 2023/06/22 23:53:24 by mabbas           ###   ########.fr       */
+/*   Created: 2023/06/22 23:34:06 by mabbas            #+#    #+#             */
+/*   Updated: 2023/06/22 23:48:48 by mabbas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#ifndef ZOMBIEHORDE_HPP
+#define ZOMBIEHORDE_HPP
+
 #include "Zombie.hpp"
 
-Zombie::Zombie()
-{
-    this->name = "Zombies";
-}
-Zombie::Zombie(std::string name)
-{
-    this->name = name;
-}
+Zombie* zombieHorde(int N, std::string name);
 
-void Zombie::announce()
-{
-    std::cout << "<" << this->name << "> Braiiiiiiinnnssss..." << std::endl;
-}
+#endif
