@@ -3,14 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   replace.cpp                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mabbas <mabbas@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mabbas <mabbas@student.42wolfsburg.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/23 00:11:58 by mabbas            #+#    #+#             */
-/*   Updated: 2023/06/23 01:27:58 by mabbas           ###   ########.fr       */
+/*   Updated: 2023/06/23 15:03:44 by mabbas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "replace.hpp"
+
+/** Reading the input files converted as strings */
 
 std::string readContentsFromFile(const std::string& filename)
 {
@@ -21,7 +23,7 @@ std::string readContentsFromFile(const std::string& filename)
         std::cerr << "Error: Input file can't be opened \"" << filename << "\"" << std::endl;
         return "";
     }
-    /** Reading input file */
+    
     std::stringstream rdInput;
     rdInput << input.rdbuf();
 
