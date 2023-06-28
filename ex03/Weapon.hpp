@@ -1,28 +1,38 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   HumanA.cpp                                         :+:      :+:    :+:   */
+/*   Weapon.hpp                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mabbas <mabbas@student.42wolfsburg.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/06/26 20:44:12 by mabbas            #+#    #+#             */
-/*   Updated: 2023/06/28 09:42:26 by mabbas           ###   ########.fr       */
+/*   Created: 2023/06/26 20:37:53 by mabbas            #+#    #+#             */
+/*   Updated: 2023/06/28 00:23:57 by mabbas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "HumanA.hpp"
+#ifndef WEAPON_H
+# define WEAPON_H
+
 #include <iostream>
+#include <string>
 
 /*
-*For the HumanA reference is more efficient and safer than a pointer.
- As the humanA will always have a weapon. References are like an alias for an object.
-*/ 
-HumanA::HumanA(const std::string& humanName, Weapon& weapon) : name(humanName), weapon(weapon) {}
+*Here we chose to use const std::string in the getType()
+ function avoid copy of type attribute and make it less expensive
 
-void HumanA::attack() const
+*/
+
+class Weapon
 {
-    std::cout << name << " attacks with his " << weapon.getType() << std::endl;
-}
+    private:
+        std::string type;
+
+    public:
+        Weapon(const std::string& weaponType);
+        const std::string getType() const;
+        void setType(const std::string& chosenType) ;
+};
 
 
 
+#endif

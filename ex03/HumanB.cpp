@@ -1,20 +1,33 @@
-#include "HumanB.h"
-#include <iostream>
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   HumanB.cpp                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mabbas <mabbas@student.42wolfsburg.de>     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/06/28 09:03:09 by mabbas            #+#    #+#             */
+/*   Updated: 2023/06/28 09:44:04 by mabbas           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
-HumanB::HumanB(const std::string& humanName) : name(humanName), weaponPresent(false) {}
+#include "HumanB.hpp"
 
-void HumanB::hasWeapon(const std::string &chooseWeapon) {
-    weaponPresent = true;
-    str::cout << name << "acquires a weapon" << humanWeapon << std::endl;
+/**
+ *HumanB may not always have a weapon. So better using a pointer 
+ *which allowws for the possibility of changing the object assocciated with 
+  the humanB obj at runtime, not possible with reference 
+ */
+HumanB::HumanB(const std::string& humanName) : name(humanName), weaponType(NULL) {}
+
+void HumanB::setWeapon(Weapon& newWeapon)
+{
+    weaponType = &newWeapon;
 }
 
-void HumanB::attack() {
-    if (hasWeapon)
-    {
-        std::cout << name << "attacks with the weapon" << std::endl;
-    }
+void HumanB::attack() const
+{
+    if (weaponType != NULL)
+        std::cout << name << " attacks with their " << weaponType->getType() << std::endl;
     else
-    {
-        std::cout << name << "attacks without any weapons " << std::endl;
-    }
+        std::cout << name << " attacks with their bare hands" << std::endl;
 }

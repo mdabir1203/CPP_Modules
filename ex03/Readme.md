@@ -7,3 +7,19 @@
 | A pointer has its own memory address and size on the stack. For example: `int x = 10; int *p = &x; cout << p << endl; // prints the address of x cout << &p << endl; // prints the address of p cout << sizeof(p) << endl; // prints the size of p` | A reference shares the same memory address with the original variable but also takes up some space on the stack. For example: `int x = 10; int &r = x; cout << &r << endl; // prints the address of x cout << sizeof(r) << endl; // prints the size of r` |
 | A pointer can be assigned NULL directly. For example: `int *p = NULL; // p points to nothing` | A reference cannot be assigned NULL. For example: `int &r = NULL; // This is incorrect` |
 | You can have a pointer to pointer offering extra levels of indirection. For example: `int x = 10; int *p = &x; int **q = &p; cout << **q << endl; // prints 10` | You can only have one level of indirection with references. For example: `int x = 10; int &r = x; int &&s = r; // This is incorrect` |
+
+
+/** Usage of base class-> ->
+    * Polymorphism and inheritance
+    * Common Interface
+    * Code Organization and maintainability
+    * Abstraction and Encapsulation
+    * Polymorphic Functionality
+    * Flexibility and Extensibility
+    * Code modularity
+   Here I use abstract base class ->
+        Compile-Time Error detection
+        Dependency Inversion
+        Design Flexibility
+        Enforcing Contacts
+ */
