@@ -1,38 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Weapon.hpp                                         :+:      :+:    :+:   */
+/*   replace.hpp                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mabbas <mabbas@student.42wolfsburg.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/06/26 20:37:53 by mabbas            #+#    #+#             */
-/*   Updated: 2023/06/28 00:23:57 by mabbas           ###   ########.fr       */
+/*   Created: 2023/06/23 01:20:10 by mabbas            #+#    #+#             */
+/*   Updated: 2023/06/28 11:36:26 by mabbas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef WEAPON_H
-# define WEAPON_H
+#ifndef REPLACE_HPP
+# define REPLACE_HPP
 
-#include <iostream>
 #include <string>
-
-/*
-*Here we chose to use const std::string in the getType()
- function avoid copy of type attribute and make it less expensive
-
-*/
-
-class Weapon
-{
-    private:
-        std::string type;
-
-    public:
-        Weapon(const std::string& weaponType);
-        const std::string getType() const;
-        void setType(const std::string& chosenType) ;
-};
+#include <iostream>
+#include <fstream>
+#include <sstream>
 
 
+std::string readContentsFromFile(const std::string filename);
+std::string replaceSubstring(const std::string& input, const std::string& s1, const std::string& s2);
+void writeContentsToFile(const std::string& filename, const std::string& modifiedrdInput);
+void replaceSED(std::string& filename, std::string& s1, std::string& s2);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: mabbas <mabbas@student.42wolfsburg.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/23 00:11:58 by mabbas            #+#    #+#             */
-/*   Updated: 2023/06/23 15:03:44 by mabbas           ###   ########.fr       */
+/*   Updated: 2023/06/28 11:48:48 by mabbas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,13 +14,13 @@
 
 /** Reading the input files converted as strings */
 
-std::string readContentsFromFile(const std::string& filename)
+std::string readContentsFromFile(const std::string filename)
 {
     std::ifstream input(filename);
 
     if (!input.is_open())
     {
-        std::cerr << "Error: Input file can't be opened \"" << filename << "\"" << std::endl;
+        std::cerr << "Error: Input file can't be opened \"" << filename << "\"" << std::endl; 
         return "";
     }
     
