@@ -1,4 +1,5 @@
 name: "CodeQL"
+
 on:
   push:
     branches: [main]
@@ -6,16 +7,18 @@ on:
     branches: [main]
   schedule:
     - cron: '0 9 * * 1'
+
 jobs:
-   analyze:
+  analyze:
     name: Analyze
     runs-on: ubuntu-latest
+
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v2
-      - name: Initialize CodeQL
-        uses: github/codeql-action/init@v1
-        with:
-           languages: "cpp"
-      - name: Perform CodeQL Analysis
-        uses: github/codeql-action/analyze@v1
+    - name: Checkout repository
+      uses: actions/checkout@v2
+    - name: Initialize CodeQL
+      uses: github/codeql-action/init@v1
+      with:
+        languages: "cpp"
+    - name: Perform CodeQL Analysis
+      uses: github/codeql-action/analyze@v1
