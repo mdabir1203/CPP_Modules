@@ -1,19 +1,18 @@
 name: "CodeQL"
 
 on:
-  push:
+ push:
     branches: [main]
-  pull_request:
+ pull_request:
     branches: [main]
-  schedule:
-    - cron: '0 9 * * 1'
+ schedule:
+   - cron: '0 9 * * 1'
 
 jobs:
-  analyze:
-    name: Analyze
-    runs-on: ubuntu-latest
-
-    steps:
+ analyze:
+   name: Analyze
+   runs-on: ubuntu-latest
+   steps:
     - name: Checkout repository
       uses: actions/checkout@v2
     - name: Initialize CodeQL
