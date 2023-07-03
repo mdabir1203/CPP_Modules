@@ -12,6 +12,11 @@
 
 #include "Fixed.hpp"
 
+/**
+ * Error faced : 
+ *  Dont send raw bits of fp no to output stream
+ *  Better send the floating-point representation of the fixed point no
+ */
 
 Fixed::Fixed() : FixedPointValue(0)
 {
@@ -21,12 +26,17 @@ Fixed::Fixed() : FixedPointValue(0)
 Fixed::Fixed(const int val)
 {
     FixedPointValue = val << fractionalBits;
-    std::cout << "Int constructor called" << std::endl;
+    std::cout << "Fixed obj created with Int constructor" << std::endl;
 }
 
 Fixed::Fixed(const float val) : FixedPointValue((int) (roundf(val * (1 << fractionalBits))))
 {
-    std::cout << "Float constructor called" << std::endl;
+    std::cout << "Fixed obj created with Float constructor" << std::endl;
+}
+
+Fixed::~Fixed(void)
+{
+	std::cout << "Fixed object destroyed" << std::endl;
 }
 
 Fixed::Fixed(const Fixed& val) : FixedPointValue(val.FixedPointValue)
@@ -49,9 +59,14 @@ int Fixed::toInt(void) const
     return (FixedPointValue >> fractionalBits);
 }
 
-Fixed::~Fixed()
+Fixed &Fixed::operator=(const Fixed& operatorVal)
 {
-    std::cout << "Destructor called" << std::endl;
+    std::cout << "Copy assignment operator called" << std::endl;
+    if (this != &operatorVal)
+    {
+        FixedPointValue = operatorVal.FixedPointValue;
+    }
+    return *this;
 }
 
 int Fixed::getRawBits() const
@@ -67,8 +82,7 @@ void Fixed::setRawBits(int rawBits)
 
 std::ostream& operator << (std::ostream& outputVal, const Fixed& fpVal)
 {
-    outputVal << fpVal.getFixedPointValue();
-    return outputVal;
+    return (outputVal << fpVal.toFloat());
 }
 
 

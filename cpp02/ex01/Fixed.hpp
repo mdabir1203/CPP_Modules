@@ -10,18 +10,6 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   Fixed.hpp                                          :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: mabbas <mabbas@student.42wolfsburg.de>     +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/07/01 16:24:13 by mabbas            #+#    #+#             */
-/*   Updated: 2023/07/01 16:24:13 by mabbas           ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
 #ifndef FIXED_HPP
 # define FIXED_HPP
 
@@ -40,16 +28,7 @@ class Fixed
 		Fixed(const Fixed& val);
         float toFloat(void) const;
         int toInt(void) const;
-        Fixed& operator = (const Fixed& operatorVal)
-        {
-            if (this != &operatorVal)
-            {
-                FixedPointValue = operatorVal.FixedPointValue;
-                std::cout << "Copy assignment operator called" << std::endl;
-            }
-        
-            return *this;
-        };
+        Fixed &operator=(const Fixed& operatorVal);
 		~Fixed();
 		int getRawBits(void) const;
 		void setRawBits(int const raw);
