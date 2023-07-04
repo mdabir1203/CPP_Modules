@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   FixedPoint.hpp                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mabbas <mabbas@student.42wolfsburg.de>     +#+  +:+       +#+        */
+/*   By: mabbas <mabbas@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/29 12:40:42 by mabbas            #+#    #+#             */
-/*   Updated: 2023/06/29 13:33:30 by mabbas           ###   ########.fr       */
+/*   Updated: 2023/07/04 03:27:53 by mabbas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,16 +24,7 @@ class FixedPoint
 	public:
 		FixedPoint();
 		FixedPoint(const FixedPoint& val);
-        FixedPoint& operator = (const FixedPoint& operatorVal)
-        {
-            if (this != &operatorVal)
-            {
-                FixedPointValue = operatorVal.FixedPointValue;
-                std::cout << "Copy assignment operator called" << std::endl;
-            }
-        
-            return *this;
-        };
+        FixedPoint& operator=(const FixedPoint& operatorVal);
 		~FixedPoint();
 		int getRawBits(void) const;
 		void setRawBits(int const raw);

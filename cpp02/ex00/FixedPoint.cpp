@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   FixedPoint.cpp                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mabbas <mabbas@student.42wolfsburg.de>     +#+  +:+       +#+        */
+/*   By: mabbas <mabbas@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/29 12:52:15 by mabbas            #+#    #+#             */
-/*   Updated: 2023/06/29 13:30:16 by mabbas           ###   ########.fr       */
+/*   Updated: 2023/07/04 03:31:04 by mabbas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,17 @@ FixedPoint::FixedPoint() : FixedPointValue(0)
 FixedPoint::FixedPoint(const FixedPoint& val) : FixedPointValue(val.FixedPointValue)
 {
     std::cout << "Copy constructor called" << std::endl;
+}
+
+FixedPoint &FixedPoint::operator=(const FixedPoint& operatorVal)
+{
+    if (this != &operatorVal)
+    {
+        FixedPointValue = operatorVal.FixedPointValue;
+        std::cout << "Copy assignment operator called" << std::endl;
+    }
+        
+    return *this;
 }
 
 FixedPoint::~FixedPoint()
