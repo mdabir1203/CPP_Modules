@@ -5,13 +5,13 @@
 #                                                     +:+ +:+         +:+      #
 #    By: mabbas <mabbas@student.42wolfsburg.de>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2023/07/01 16:23:08 by mabbas            #+#    #+#              #
-#    Updated: 2023/07/01 16:23:08 by mabbas           ###   ########.fr        #
+#    Created: 2023/07/01 16:19:25 by mabbas            #+#    #+#              #
+#    Updated: 2023/07/01 16:19:25 by mabbas           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME = Fixed
-SRC = main.cpp Fixed.cpp
+NAME = FixedPoint
+SRC = main.cpp FixedPoint.cpp
 OBJ = $(SRC:.cpp=.o)
 CC  = g++
 RM  = rm -f
