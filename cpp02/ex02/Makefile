@@ -3,15 +3,15 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: mabbas <mabbas@student.42wolfsburg.de>     +#+  +:+       +#+         #
+#    By: mabbas <mabbas@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2023/07/03 22:10:12 by mabbas            #+#    #+#              #
-#    Updated: 2023/07/08 15:56:09 by mabbas           ###   ########.fr        #
+#    Created: 2023/07/03 20:49:21 by mabbas            #+#    #+#              #
+#    Updated: 2023/07/03 20:49:23 by mabbas           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME = FixedPoint
-SRC = main.cpp FixedPoint.cpp
+NAME = Fixed
+SRC = main.cpp Fixed.cpp
 OBJ = $(SRC:.cpp=.o)
 CC  = g++
 RM  = rm -f
