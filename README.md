@@ -11,6 +11,6 @@
 ##  Feel Free to Feedback / Add the remaining as a contributor .Scan the Qr Code / Click to generate : 
 
 
-<img src="https://github.com/mdabir1203/objectsNcpp/assets/66947064/fc7af7df-d86f-4174-994a-f7577b0d682d" width="300" height="200">
+<img src="https://github.com/mdabir1203/objectsNcpp/assets/66947064/fc7af7df-d86f-4174-994a-f7577b0d682d" width="400" height="400">
 
 
