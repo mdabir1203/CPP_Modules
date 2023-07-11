@@ -8,7 +8,9 @@
 
 
 
-###  [[Feel Free to Feedback / Add the remaining as a contributor]] 
+##  Feel Free to Feedback / Add the remaining as a contributor
+
+
 
 ![image](https://github.com/mdabir1203/objectsNcpp/assets/66947064/fc7af7df-d86f-4174-994a-f7577b0d682d)
 
