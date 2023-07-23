@@ -6,14 +6,14 @@
  * block */
 int main() {
     try {
-        Bureaucrat bob("Bob", 50);
-        std::cout << bob << std::endl;
-        bob.incrementGrade();
-        std::cout << bob << std::endl;
-        bob.decrementGrade();
-        std::cout << bob << std::endl;
-        Bureaucrat alice("Alice", 0);
-        std::cout << alice << std::endl;
+        Bureaucrat merve("Merve", 150);
+        std::cout << merve << std::endl;
+        merve.incrementGrade();
+        std::cout << merve << std::endl;
+        merve.decrementGrade();
+        std::cout << merve << std::endl;
+        Bureaucrat click("Velma", 0);
+        std::cout << click << std::endl;
     }
     
     catch (Bureaucrat::GradeTooHighException& e) {
@@ -23,7 +23,7 @@ int main() {
     }
 
     try {
-        Bureaucrat charlie("Charlie", 151);
+        Bureaucrat random("Random", 151);
     } catch (Bureaucrat::GradeTooHighException& e) {
         std::cerr << e.what() << std::endl;
     } catch (Bureaucrat::GradeTooLowException& e) {
