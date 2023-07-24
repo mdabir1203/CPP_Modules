@@ -73,7 +73,7 @@
 	{
 		try
 		{
-			if (this->getGrade() <= form.getGradeToSign())
+			if (this->getGrade() <= form.getGradeToSign()) // check if the bureaucrat's grade is low enough to sign the form
 			{
 				form.beSigned(*this);
 				std::cout << this->name << " signed " << form.getName() << std::endl;
