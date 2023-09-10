@@ -47,6 +47,7 @@ $(OBJDIR)/%.o: $(SRCDIR)/%.cpp $(HEADER)
 
 clean:
 	@$(RM) $(OBJDIR)
+	@$(RM) home_shrubbery
 	@printf "$(YELLOW)- Object files removed.$(RESET)\n"
 
 fclean: clean
