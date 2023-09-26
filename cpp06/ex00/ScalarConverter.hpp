@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ScalarConverter.hpp                                :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mabbas <mabbas@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/09/20 00:20:34 by mabbas            #+#    #+#             */
+/*   Updated: 2023/09/20 00:20:36 by mabbas           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 // write a static class ScalarConverter containing method "convert" taking string of c++ literals as parameters
 // and returning a char, int, float or double depending on the string passed as parameter. Only decimal notations are used . Also include pseudo literals
 // help me write it along with test cases
@@ -9,6 +21,7 @@
 #include <exception>
 #include <climits>
 #include <sstream>
+#include <cstdlib>
 
 enum e_types {
   UNDETERMINED,
@@ -43,8 +56,8 @@ class ScalarConverter
   private:
     std::string inputs_;
     e_types type_;
-    void detectType(void);
-    void detectLiterals(std::string str);
+    void detectType(std::string str);
+    void detectLiterals(void);
     void displayChar(void) const;
     void displayInt(void) const;
     void displayDouble(void) const;

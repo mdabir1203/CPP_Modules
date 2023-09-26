@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ScalarConverter.cpp                                :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mabbas <mabbas@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/09/20 00:20:29 by mabbas            #+#    #+#             */
+/*   Updated: 2023/09/20 00:20:31 by mabbas           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "ScalarConverter.hpp"
 
 // Used istringstream here ->
@@ -6,17 +18,17 @@
 // -> Error handling
 // -> Floating point literal ->
 
-ScalarConverter::ScalarConverter() : type(UNDETERMINED) {}
+ScalarConverter::ScalarConverter() : type_(UNDETERMINED) {}
 
 ScalarConverter::ScalarConverter(const ScalarConverter &copy) {
-  this->Inputs_ = copy.getInput();
-  this->type_ = copy.get_type()
+  this->inputs_ = copy.getInput();
+  this->type_ = copy.getType();
 }
 
 ScalarConverter::~ScalarConverter() {}
 
 ScalarConverter &ScalarConverter::operator=(const ScalarConverter &copy) {
-  this->inputs_ = copy.getInputs;
+  this->inputs_ = copy.getInput();
   this->type_ = copy.getType();
   return *this;
 }
@@ -53,13 +65,13 @@ void ScalarConverter::detectType(std::string str) {
   bool hasDecimalPoint(false);
 
   if (str.at(0) == '+' || str.at(0) == '-') i++;
-  while (i < len) {
+  while (i < length) {
     if (str.at(i) == 'f' && (i + 1) == length && std::isdigit(inputs_.at(i - 1))){
       this->type_ = FLOAT;
       return ;
     } else if (str.at(i) == '.') {
       if (hasDecimalPoint == false) // str with at most one dot are considered valid double values
-          hasDecimalPoint == true;
+          hasDecimalPoint = true;
       else
           return ;
     } else if (!std::isdigit(str.at(i))) {
@@ -67,7 +79,7 @@ void ScalarConverter::detectType(std::string str) {
     }
     i++;
   }
-  if (decimal == true)
+  if (hasDecimalPoint == true)
       this->type_ = DOUBLE;
   else
       this->type_ = INT;
@@ -95,7 +107,7 @@ void ScalarConverter::display(void) {
         this->displayNan();
         break;
       case INF:
-        this->displayINF();
+        this->displayInf();
         break;
       default:
         std::cout << "We fucked up somewhere!!! " << std::endl;
@@ -104,7 +116,7 @@ void ScalarConverter::display(void) {
 
 void ScalarConverter::displayChar() const {
   char chars = this->inputs_.at(0);
-  if (std::isprint(c))
+  if (std::isprint(chars))
         std::cout << "char: '" << chars << "'" << std::endl;
   else
         std::cout << "char: Non displayable" << std::endl;
@@ -113,9 +125,9 @@ void ScalarConverter::displayChar() const {
   std::cout << "double: " << static_cast<double>(chars) << std::endl;
 }
 
-
 void ScalarConverter::displayInt() const {
-  long int InputVal = strtol(this->inputs_.c_str()), NULL, 10);
+  long int InputVal = atol(this->inputs_.c_str());
+
   if (InputVal > INT_MAX || InputVal < INT_MIN){
         std::cout << "Error: input is an INT, and overflowed" << std::endl;
         return;
@@ -138,7 +150,7 @@ void ScalarConverter::displayInt() const {
 
         // double conversion
 
-        std::cout "double: " << static_cast<double>(i);
+        std::cout << "double: " << static_cast<double>(i);
         if (i < 1000000)
           std::cout << ".0" << std::endl;
         else
@@ -153,8 +165,8 @@ void ScalarConverter::displayDouble() const {
         // Char conversions
         if (d >= CHAR_MIN && d < CHAR_MAX + 1) {
         char chars = static_cast<char>(d);
-        if (std::isprint(c))
-          std::cout << "char: '" << c << "'" << std::endl;
+        if (std::isprint(chars))
+          std::cout << "char: '" << chars << "'" << std::endl;
         else
           std::cout << "char: Non displayable" << std::endl;
         } else {
@@ -220,32 +232,33 @@ void ScalarConverter::displayFloat() const {
 void ScalarConverter::displayNan() const {
         std::cout << "char: impossible " << std::endl;
         std::cout << "int: impossible " << std::endl;
+        double d = std::numeric_limits<double>::quiet_NaN();
         if (this->inputs_ == "nan") {
-            double d = std::numeric_limits<double>::quiet_NaN(); // to initialize nan with double value
+            //double d = std::numeric_limits<double>::quiet_NaN(); // to initialize nan with double value
             std::cout << "float: " << static_cast<float>(d) << "f" << std::endl;
             std::cout << "double: " << d << std::endl;
         }
          // floating NaN
         else if (this->inputs_ == "nanf") {
             float f = std::numeric_limits<float>::quiet_NaN();
-            std::cout << "float: " << static_cast<float>(d) << f << "f" << std::endl:
+            std::cout << "float: " << static_cast<float>(d) << f << "f" << std::endl;
             std::cout << "double: " << static_cast<double>(f) << std::endl;
         }
 }
 
-void ScalarConverter::displayInt() const {
+void ScalarConverter::displayInf() const {
         std::cout << "char: impossible" << std::endl;
         std::cout << "int: impossible" << std::endl;
         if (!this->inputs_.compare(1, 4, "inf")) {
             double d = std::numeric_limits<double>::infinity(); // geting infinity values
-            if (this->inputs_.at(0) == '-') d == -d; // taking absolute val to make it pos
+            if (this->inputs_.at(0) == '-') d = -d; // taking absolute val to make it pos
             std::cout << "float: " << static_cast<float>(d) << "f" << std::endl;
             std::cout << "double: " << d << std::endl;
         }
         // floating infinity
         else if (!this->inputs_.compare(1, 5, "inff")) {
             float f = std::numeric_limits<float>::infinity();
-            if (this->inputs_.at(0) == '-') f == -f;
+            if (this->inputs_.at(0) == '-') f = -f;
             std::cout << "float: " << f << "f" << std::endl;
             std::cout << "double: " << static_cast<double>(f) << std::endl;
         }
