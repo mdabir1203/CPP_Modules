@@ -10,7 +10,7 @@
 #                                                                              #
 # **************************************************************************** #
 
-NAME		= whatever
+NAME		= array
 
 CC			= c++
 FLAGS		= -Wall -Wextra -Werror -std=c++98
@@ -22,7 +22,7 @@ FILES		= main
 
 SRC			= $(FILES:=.cpp)
 OBJ			= $(addprefix $(OBJDIR)/, $(FILES:=.o))
-HEADER		= whatever.hpp
+HEADER		= Array.hpp
 
 #Colors:
 GREEN		=	\e[92;5;118m
