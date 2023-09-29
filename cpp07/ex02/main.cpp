@@ -1,100 +1,66 @@
+#include <iostream>
 #include "Array.hpp"
+
 #include <iostream>
-#include <cstdlib>
+#include "Array.hpp"
 
-#define SIZE 5
-int	main()
+
+
+// if (size != 0) -> print error
+// arr with size 10 -> check size correct
+// assign val in arr with loop (with idx i)
+// loop to print val each elem in array
+// create copy of arr and print val
+// assign val to first 3 elem of arr and check if elem correct
+// assign to  5th elem of array -> (checking out of bounds) -> trigger exception
+// print msg -> test passed
+
+int main()
 {
-  Array<int>			intArray;
-  Array<int>			copy(SIZE);
-  Array<std::string>	strArray(SIZE);
 
-  for (int i = 0; i < 5; i++)
-    copy[i] = rand() % 50;
-
-  std::cout << "intArray size: " << intArray.size() << std::endl;
-  std::cout << "strArray size: " << strArray.size() << std::endl;
-  std::cout << "copy size: " << intArray.size() << std::endl;
-
-  std::cout << "\nLet's assign copy to intArray..." << std::endl;
-  intArray = copy;
-  std::cout << intArray << std::endl;
-
-  std::cout << "\nLet's write the strArray with strings..." << std::endl;
-  strArray[0] = "Robin";
-  strArray[1] = "Batman";
-  strArray[2] = "Poison Ivy";
-  strArray[3] = "Riddler";
-  strArray[4] = "Bane";
-  std::cout << strArray << std::endl;
-
-  std::cout << "\nLet's try getting elems out of intArray size" <<std::endl;
-  try
+  // Testing empty array
+  Array<int> emp_arr;
+  if (emp_arr.size() != 0)
   {
-    std::cout << intArray[69] << std::endl;
+    std::cout << "Empty array size not correct" << std::endl;
+    return (1);
   }
-  catch (std::exception &e)
+    // Testing array with specific size (n = 10)
+  Array<int> array(10);
+  if (array.size() != 10){
+    std::cout << "Array size not correct" << std::endl;
+  }
+  for (unsigned int i = 0; i < array.size(); i++) {
+    array[i] = i;
+  }
+  for (unsigned int i = 0; i < array.size(); i++) {
+    std::cout << array[i] << " ";
+  }
+  std::cout << std::endl;
+  //Testing copied array
+  Array<int> copy(array);
+  for (unsigned int i = 0; i < copy.size(); i++) {
+    std::cout << copy[i] << " ";
+  }
+  std::cout << std::endl;
+  // Testing out of bound and element access
+
+  array[0] = 3;
+  array[1] = 4;
+  array[2] = 5;
+  if (array[0] != 3 || array[1] != 4 || array[2] != 5)
   {
-    std::cout << "59: " << e.what() << std::endl;
+    std::cout << "Element access not correct" << std::endl;
+    return (1);
   }
-
-  try
-  {
-    std::cout << intArray[-3] << std::endl;
+  try {
+    array[5] = 13;
+  } catch (std::out_of_range& e){
+    std::cout << "yo bro you are out" << std::endl;
+  } catch (...) {
+    std::cout << "Unexpected exception caught" << std::endl;
+    return (1);
   }
-  catch (std::exception &e)
-  {
-    std::cout << "-3: " << e.what() << std::endl;
-  }
-
-  return (0);
-}#include "Array.hpp"
-#include <iostream>
-#include <cstdlib>
-
-    int	main()
-{
-  Array<int>			intArray;
-  Array<int>			copy(5);
-  Array<std::string>	strArray(5);
-
-  for (int i = 0; i < 5; i++)
-    copy[i] = rand() % 100;
-
-  std::cout << "intArray size: " << intArray.size() << std::endl;
-  std::cout << "strArray size: " << strArray.size() << std::endl;
-  std::cout << "copy size: " << intArray.size() << std::endl;
-
-  std::cout << "\nLet's assign copy to intArray..." << std::endl;
-  intArray = copy;
-  std::cout << intArray << std::endl;
-
-  std::cout << "\nLet's write the strArray with strings..." << std::endl;
-  strArray[0] = "Lufi";
-  strArray[1] = "Ace";
-  strArray[2] = "Sabo";
-  strArray[3] = "Dragon";
-  strArray[4] = "Garp";
-  std::cout << strArray << std::endl;
-
-  std::cout << "\nLet's try getting elems out of intArray size" <<std::endl;
-  try
-  {
-    std::cout << intArray[59] << std::endl;
-  }
-  catch (std::exception &e)
-  {
-    std::cout << "59: " << e.what() << std::endl;
-  }
-
-  try
-  {
-    std::cout << intArray[-3] << std::endl;
-  }
-  catch (std::exception &e)
-  {
-    std::cout << "-3: " << e.what() << std::endl;
-  }
-
-  return (0);
+  std::cout << "All tests passed" << std::endl;
+  return 0;
 }

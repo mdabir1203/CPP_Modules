@@ -1,57 +1,40 @@
 template <typename T>
-Array<T>::Array(void) : arr_(NULL), _size(0){}
-
-Array<T>::Array(unsigned int n) : data(new T[n], _size(n)){}
-
-template <typename T>
-Array<T>::Array(const Array& copy)
-{
-  size_ = copy.size_;
-  arr_ = new T[size_];
-  unsigned int i = 0;
-  while (i++ < size_)
-  {
-    arr_[i] = copy.array[i];
-  }
+Array<T>::Array() : data(), size_(0){
+  data = new T[size_];
 }
 
-template<typename T>
-Array<T>& Array<T>::operator=(const Array& copy)
+template <typename T>
+Array<T>::Array(unsigned int n) : size_(n)
 {
-  if (this != &copy) {
-    delete[] arr_;
+  data = new T[size_]();
+}
 
-    size_ = copy.size_;
-    arr_ = new T[size_];
-    unsigned int i = 0;
-    while (i++ < size_)
-    {
-      arr_[i] = copy.array[i];
-    }
-  }
-  return *this;
+template <typename T>
+Array<T>::Array(const Array& copy) : size_(copy.size_)
+{
+  data = new T[size_];
+  std::copy(copy.data, copy.data + size_, data);
 }
 
 template <typename T>
 Array<T>::~Array()
 {
-  delete[] arr_;
+  delete[] data;
 }
 
 template <typename T>
-T& Array<T>::operator[](unsigned int idx)
+T& Array<T>::operator[](unsigned int idx) const
 {
-  if (idx >= size_)
-  {
+  if (idx >= size_){
     throw std::exception();
   }
-  return arr_[idx];
+  return data[idx];
 }
 
-template <typename T>
-const T& Array<T>::operator[](unsigned int idx) const
+template<typename T>
+unsigned int Array<T>::size() const
 {
-  if (idx >= size_)
-    throw std::exception();
-  return arr_[idx];
+  return size_;
 }
+
+

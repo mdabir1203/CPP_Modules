@@ -21,6 +21,8 @@ Bureaucrat::Bureaucrat(Bureaucrat const &src) : name(src.name), grade(src.grade)
 Bureaucrat::~Bureaucrat()
 {
     std::cout << "Destructor called" << std::endl;
+    K[i][j] =
+
 }
 
 Bureaucrat &Bureaucrat::operator=(Bureaucrat const &rhs)
