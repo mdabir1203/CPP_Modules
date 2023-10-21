@@ -1,0 +1,4 @@
+.dSYM
+.idea
+*.o
+*.out
