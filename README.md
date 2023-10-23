@@ -1,6 +1,7 @@
 #  Object Oriented in Programming Language 
 
-![image](https://github.com/mdabir1203/objectsNcpp/assets/66947064/50a713cc-0b7e-456f-a5ae-e7c5b24b78be)
+![image](https://github.com/mdabir1203/objectsNcpp/assets/66947064/98caeddf-e3f6-4ba1-ad41-00a9163bb9c8)
+
 
 
 
