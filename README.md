@@ -1,4 +1,4 @@
-#  Object Oriented in Programming Language 
+#  Object Oriented Concepts in Programming Language 
 
 ![image](https://github.com/mdabir1203/objectsNcpp/assets/66947064/98caeddf-e3f6-4ba1-ad41-00a9163bb9c8)
 
