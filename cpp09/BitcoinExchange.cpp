@@ -1,162 +1,143 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   BitcoinExchange.cpp                                :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: mabbas <mabbas@student.42.fr>              +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/22 23:00:17 by mabbas            #+#    #+#             */
-/*   Updated: 2023/10/23 02:51:01 by mabbas           ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
+#include <iostream>
+#include <fstream>
+#include <string>
+#include <sstream>
 #include "BitcoinExchange.hpp"
 
-BitcoinExchange::BitcoinExchange(){};
 
-BitcoinExchange::BitcoinExchange(const std::string& dbFileName)
+static unsigned int ft_stou(const std::string& str)
 {
-    std::ifstream dbFile(dbFileName);
-    std::string line, date;
-    float rate;
+    unsigned int num;
+    std::stringstream ss(str);
 
-    while (getline(dbFile, line))
-    {
-        std::istringstream ss(line);
-        getline(ss, date, '|');
-        ss >> rate;
-        exchangeRates[date] = rate;
-    }
-    dbFile.close();
+    ss >> num;
+    return num;
 }
 
-BitcoinExchange::BitcoinExchange(const BitcoinExchange &copyBTC)
+float ft_stof(const std::string& str)
 {
-    exchangeRates = copyBTC.exchangeRates; 
+    float num;
+    std::stringstream ss(str);
+
+    ss >> num;
+    return num;
 }
 
-BitcoinExchange& BitcoinExchange::operator=(const BitcoinExchange &copyBTC)
-{
-    if (this != &copyBTC){
-        exchangeRates = copyBTC.exchangeRates;
-    }
-    return (*this);
+BitcoinExchange::BitcoinExchange(void) {};
+
+BitcoinExchange::BitcoinExchange(const BitcoinExchange& to_copy) {
+    *this = to_copy;
 }
 
-BitcoinExchange::~BitcoinExchange()
+BitcoinExchange& BitcoinExchange::operator=(const BitcoinExchange& to_copy) {
+    this->dataBase = to_copy.dataBase;
+    return *this;
+}
+
+BitcoinExchange::~BitcoinExchange(void) {};
+
+float BitcoinExchange::getRateFromDataBase(const std::string& date)
 {
+    if (this->dataBase.count(date) > 0)
+        return this->dataBase.at(date);
+    return (--this->dataBase.lower_bound(date))->second;
+}
+
+
+// Check if empty -> return False
+// Check if there are 2 hyphens . If not found -> Return False
+// Numbers , Hyphens, periods -> Return False otherwise True
+
+bool BitcoinExchange::validateDateFormat(const std::string &date)
+{
+	if (date.empty())
+        return false;
+    size_t first_hyphen = date.find('-');
+    size_t second_hyphen = date.find('-', first_hyphen + 1);
     
-}
-
-static bool isLeapYear(int year) {
-    return (year % 4 == 0 && year % 100 != 0) || (year % 400 == 0);
-}
-
-static int getDaysInMonth(int month, int year) {
-    static const int daysInMonth[] = {0, 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
-    if (month == 2 && isLeapYear(year)) {
-        return 29;
-    }
-    return daysInMonth[month];
-}
-
-// Validation check ->  length, hyphen check, YMD extraction, Check Numeric, Check range(Y(>1900), M(1 - 12), D(with / wout leap year))
-bool BitcoinExchange::validateDate(const std::string &date)
-{
-    if (date.length() != 10 || date[4] != '-' || date[7] != '-' )
+    if (first_hyphen == std::string::npos || second_hyphen == std::string::npos || date.find_first_not_of("0123456789.-") != std::string::npos)
     {
-        throw WrongDateException();
-    }
-    std::string yearStr = date.substr(0, 4);
-    std::string monthStr = date.substr(5, 2);
-    std::string dayStr = date.substr(8, 2);
-
-    int year, month, day;
-
-    try {
-        year = std::stoi(yearStr);
-        month = std::stoi(monthStr);
-        day = std::stoi(dayStr);
-    } catch (...){
-        throw WrongDateException();
-    }
-
-    if (year < 1900 || year > 2100){
-        throw WrongDateException();        
-    }
-    if (month < 1 || month > 12){
-        throw WrongDateException();
-    }
-
-    if (day < 1 || day > getDaysInMonth(month, year))
-        throw WrongDateException();
-
+        std::cerr << errorMessage << "\"" << date << "\"" << '\n';
+        return (false);
+    }    
     return (true);
 }
 
-// -> invalid argument, out of range
-
-bool BitcoinExchange::validateVal(const std::string &value, float &outVal)
+bool BitcoinExchange::isValidDate(const std::string& date)
 {
-    try{
-        outVal = std::stof(value);
-        if (outVal >= 0 && outVal <= 1000){
-            return (true);
-        } else{
-            throw WrongValException();
-        }
-    } catch (const std::invalid_argument& ia){
-        throw WrongValException();
-    } catch (const std::out_of_range& oor){
-        throw WrongValException();
-    }
-    return (false); // unnecessary and then completing the function
+	std::string s;
+	int year, month, day;
+	std::istringstream ss(date);
+	int i = 0;
+
+	while (std::getline(ss, s, '-'))
+	{
+		if (i == 0)
+		{
+			year = ft_stou(s);
+			if (year < 2009 || year > 2022)
+			{
+				std::cerr << YEAR_NOT_ON_DB_ERR << "\"" << date << "\"" << '\n';
+				return false;
+			}
+		}
+		if (i == 1)
+		{
+			month = ft_stou(s);
+			if (month < 1 || month > 12)
+			{
+				std::cerr << INCORRECT_MONTH_ERR << "\"" << date << "\"" << '\n';
+				return false;
+			}
+		}
+		if (i == 2)
+		{
+			day = ft_stou(s);
+			if ((day < 1 || day > 31)
+			||  (day == 31 && (month == 2 || month == 4 || month == 6 || month == 9 || month == 11))
+			||  (day > 28 && month == 2))
+			{
+				std::cerr << INCORRECT_DAY_ERR << "\"" << date << "\"" << '\n';
+				return false;
+			}
+		}
+		i += 1;
+	}
+	if (i != 3)
+	{
+		std::cerr << INCORRECT_DATE_ERR << "\"" << date << "\"" << '\n';
+		return false;
+	}
+	return true;
 }
 
-// ExchangeRates -> get lowerbounds, checkDatefound, closest lower Date(if at begining don't decrease)
-// Return (exchangeRate for foundDate / closest lower date)
-// -> lower_bound -> find the date / next higher date
-// -> If (dateNotFound and not start -> decrement)
-// If no lowerDate -> return defaultVal / exception
-// retunr (exchangeRate-> foundDate / closestLowerDate)
-
-float BitcoinExchange::getExchangeRate(const std::string &date)
+bool BitcoinExchange::validRate(const std::string& rate)
 {
-    
-    std::map<std::string, float>::iterator it = exchangeRates.lower_bound(date);
-    
-    if (it == exchangeRates.end() || it->first != date){
-        if (it == exchangeRates.begin()){
-            return (0.0f);
-        }
-        --it;
-    }
-    return (it->second);
+	if (rate.empty() || rate.find_first_not_of("0123456789.-") != std::string::npos
+	||  rate.at(0) == '.' || rate.find('.', rate.length() - 1) != std::string::npos)
+		std::cerr << INVALID_RATE_ERR << "\"" << rate << "\"" << '\n';
+	else if (rate.at(0) == '-')
+		std::cerr << NOT_A_POSITIVE_ERR << '\n';
+	else if (rate.length() > 10 || (rate.length() == 10 && rate > "2147483647"))
+		std::cerr << TOO_LARGE_ERR << '\n';
+	else
+		return true;
+	return false;
 }
 
-
-// -> reads from input
-// -> parses each line -> extract date and val
-// -> validates extracted data
-// -> Retrieves exchange rate for date 
-// -> If any data invalid ->  throw exception
-void BitcoinExchange::processCSV(const std::string &inFile)
+void BitcoinExchange::readInternalDataBase(std::ifstream& internal_db)
 {
-    std::ifstream inputFilename(inFile);
-    std::string line, date, valueStr;
-    float value;
+    std::string line;
+    size_t delim;
 
-    while (getline(inputFilename, line)){
-        std::istringstream ss(line);
-        getline(ss, date, '|');
-        getline(ss, valueStr);
-
-        if (validateDate(date) && validateVal(valueStr, value)){
-            float rate = getExchangeRate(date);
-            std::cout << "Value on " << date << ": " << value * rate << std::endl;
-        } else {
-            throw WrongInputException();
-        }
+    // skip first line
+    std::getline(internal_db, line);
+    while (std::getline(internal_db, line))
+    {
+        delim = line.find(',');
+        std::string rate = line.substr(delim + 1);
+        // set a new pair on the map <date, rate>
+        this->dataBase[line.substr(0, delim)] = ft_stof(rate);
     }
-    inputFilename.close(); // call the close on a stream object
+    internal_db.close();
 }
