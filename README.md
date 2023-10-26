@@ -1,16 +1,13 @@
-#  Object Oriented in Programming Language 
-## A Short Draw of Object Oriented Programming Concepts -- [[Under Construction]]
+#  Object Oriented Concepts in Programming Language 
 
-![image](https://github.com/mdabir1203/objectsNcpp/assets/66947064/b87cf0ee-afaf-4372-9f03-e2fc4803e1a8)
-
+![image](https://github.com/mdabir1203/objectsNcpp/assets/66947064/98caeddf-e3f6-4ba1-ad41-00a9163bb9c8)
 
 
 
 
 
-##  Feel Free to Feedback / Add the remaining as a contributor .Scan the Qr Code / Click to generate : 
-
-
-<img src="https://github.com/mdabir1203/objectsNcpp/assets/66947064/fc7af7df-d86f-4174-994a-f7577b0d682d" width="400" height="400">
-
+------- ------------ ----------- ------------- ------------
+<p align="center">
+  <img src="https://github.com/mdabir1203/objectsNcpp/assets/66947064/fc7af7df-d86f-4174-994a-f7577b0d682d" width="300">
+</p>
 
