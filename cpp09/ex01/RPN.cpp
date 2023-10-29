@@ -6,7 +6,7 @@
 /*   By: mabbas <mabbas@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/29 16:45:12 by mabbas            #+#    #+#             */
-/*   Updated: 2023/10/29 17:04:40 by mabbas           ###   ########.fr       */
+/*   Updated: 2023/10/29 17:08:21 by mabbas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ RPN & RPN::operator=(RPN const & copy) {
 // -> Without needing to know size of input expression 
 // Benefits of stack -> simplified, efficiency , versatility
 // Use cases :  function calls , expression evaluation, backtracking, undo/redo functionality
-
+// [3, 4, 5] -> [3], [4,5] extracting top two elements
 bool RPN::handle_operator(char op)
 {
     if (stack.size() < 2)
